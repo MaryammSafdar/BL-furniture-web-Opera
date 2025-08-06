@@ -1,0 +1,43 @@
+import React from 'react';
+import './ContactUs.css';
+
+const ContactUs = () => {
+    return (
+        <div className="contact-container">
+            <div className="overlay">
+                <h1>Contact Us</h1>
+                <p className="intro">
+                    We're here to help. Get in touch with us via any of the following methods.
+                </p>
+
+                <div className="contact-details">
+                    <div className="contact-card">
+                        <h2>Email</h2>
+                        <p>flavorsfusion@contact.com</p>
+                    </div>
+
+                    <div className="contact-card">
+                        <h2>Phone</h2>
+                        <p>+92 300 18234567</p>
+                    </div>
+
+                    <div className="contact-card">
+                        <h2>Address</h2>
+                        <p>123 Main Street, Lahore, Pakistan</p>
+                    </div>
+                </div>
+
+                <div className="social-links">
+                    <h3>Follow Us</h3>
+                    <div className="icons">
+                        <a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a>
+                        <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
+                        <a href="https://twitter.com" target="_blank" rel="noreferrer">Twitter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ContactUs;
