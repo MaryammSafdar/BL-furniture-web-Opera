@@ -1,0 +1,53 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "./PrivacyPolicy.css";
+
+function PrivacyPolicy() {
+  const navigate = useNavigate();
+
+  return (
+    <div className="privacy-policy-page">
+      <aside className="privacy-policy-sidebar">
+        <h1>Privacy Policy</h1>
+        <p>Your privacy is our top priority at Baby Land Furniture.</p>
+      </aside>
+
+      <main className="privacy-policy-content-wrapper">
+        <h2>What We Collect & How We Use It</h2>
+        <ul>
+          <li>
+            <strong>1. Information Collected:</strong> Name, email, phone number,
+            address, and purchase details.
+          </li>
+          <li>
+            <strong>2. Usage:</strong> To process orders, provide services, improve
+            our product offerings, and send important updates.
+          </li>
+          <li>
+            <strong>3. Data Security:</strong> We protect your personal information
+            with encryption, secure servers, and restricted access.
+          </li>
+          <li>
+            <strong>4. Your Rights:</strong> You may request access, correction, or
+            deletion of your personal data by contacting
+            <a href="mailto:support@babylandfurniture.com">
+              {" "}
+              support@babylandfurniture.com
+            </a>.
+          </li>
+          <li>
+            <strong>5. Changes:</strong> Any updates to this policy will be posted
+            here with a revised date.
+          </li>
+        </ul>
+        <p className="privacy-policy-date">Last updated: August 6, 2025</p>
+
+        <button className="privacy-policy-btn" onClick={() => navigate("/")}>
+          Back to Home
+        </button>
+      </main>
+    </div>
+  );
+}
+
+export default PrivacyPolicy;
