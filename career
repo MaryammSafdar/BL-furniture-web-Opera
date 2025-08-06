@@ -1,0 +1,74 @@
+import React from 'react';
+import './Career.css';
+import {
+    FaUserTie,
+    FaCouch,
+    FaTruckMoving,
+    FaPaintRoller,
+    FaUserGraduate,
+    FaEnvelope,
+    FaMapMarkerAlt,
+    FaHandshake
+} from 'react-icons/fa';
+
+const Career = () => {
+    return (
+        <div className="career-container">
+            <div className="career-overlay">
+                <h1>Join Baby Land Furniture</h1>
+                <p className="career-intro">
+                    We’re always looking for passionate individuals who want to create beautiful living spaces for families.
+                </p>
+
+                <div className="job-list">
+                    <div className="job-card">
+                        <FaHandshake size={30} className="job-icon" />
+                        <h3>Sales Associate</h3>
+                        <p>Assist customers in selecting furniture, provide product details, and ensure a great shopping experience.</p>
+                    </div>
+
+                    <div className="job-card">
+                        <FaUserTie size={30} className="job-icon" />
+                        <h3>Showroom Manager</h3>
+                        <p>Oversee daily operations, manage staff, and maintain showroom displays.</p>
+                    </div>
+
+                    <div className="job-card">
+                        <FaCouch size={30} className="job-icon" />
+                        <h3>Furniture Designer</h3>
+                        <p>Create innovative furniture designs tailored for nurseries and children’s rooms.</p>
+                    </div>
+
+                    <div className="job-card">
+                        <FaTruckMoving size={30} className="job-icon" />
+                        <h3>Delivery & Assembly Staff</h3>
+                        <p>Ensure safe delivery and proper assembly of furniture at customer locations.</p>
+                    </div>
+
+                    <div className="job-card">
+                        <FaPaintRoller size={30} className="job-icon" />
+                        <h3>Workshop Technician</h3>
+                        <p>Work in our workshop to repair, customize, and maintain high-quality furniture pieces.</p>
+                    </div>
+
+                    <div className="job-card">
+                        <FaUserGraduate size={30} className="job-icon" />
+                        <h3>Intern</h3>
+                        <p>Gain hands-on experience in furniture retail, design, and customer service. Certificate provided.</p>
+                    </div>
+                </div>
+
+                <div className="apply-info">
+                    <p>
+                        <FaEnvelope className="info-icon" /> Send your CV to <strong>careers@babylandfurniture.com</strong>
+                    </p>
+                    <p>
+                        <FaMapMarkerAlt className="info-icon" /> Visit our showroom between <strong>10 AM - 5 PM (Mon-Sat)</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Career;
