@@ -1,0 +1,372 @@
+import React, { useEffect, useState, useRef } from "react";
+import "./HomePage.css";
+import { FaChevronDown, FaCommentDots } from "react-icons/fa";
+import { useNavigate, Link } from "react-router-dom";
+import { SiGoogle } from 'react-icons/si';
+import { FaStar, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+
+
+ const productImages = [
+  "/images/image 1.jpg",
+  "/images/image 2.jpg",
+  "/images/image 3.webp", 
+  "/images/image 44.jpg"  
+];
+
+
+
+const navLinks = [
+  {
+    title: "Home",
+    items: [
+      { name: "Overview", path: "/overview" },
+      { name: "Why Babyland?", path: "/why-babyland" },
+    ],
+  },
+  {
+    title: "Shop",
+    items: [
+      { name: "Toys", path: "/toys" },
+      { name: "Clothing", path: "/clothing" },
+      { name: "Furniture", path: "/furniture" },
+      { name: "Baby Care", path: "/babycare" },
+    ],
+  },
+  {
+    title: "Services",
+    items: [
+      { name: "Gift Registry", path: "/registry" },
+      { name: "Baby Consultation", path: "/consultation" },
+      { name: "Custom Orders", path: "/custom-orders" },
+    ],
+  },
+  {
+    title: "Contact Us",
+    items: [
+      { name: "Careers", path: "/career" },
+      { name: "Store Locations", path: "/locations" },
+      { name: "Reach Out", path: "/contact" },
+    ],
+  },
+  {
+    title: "Policies",
+    items: [
+      { name: "Privacy Policy", path: "/privacy-policy" },
+      { name: "Terms & Conditions", path: "/terms" },
+    ],
+  },
+];
+
+export default function HomePage() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [showChat, setShowChat] = useState(false);
+  const navigate = useNavigate();
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % productImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const cursor = document.querySelector(".custom-cursor");
+    const moveCursor = (e) => {
+      cursor.style.left = `${e.clientX}px`;
+      cursor.style.top = `${e.clientY}px`;
+    };
+    window.addEventListener("mousemove", moveCursor);
+    return () => window.removeEventListener("mousemove", moveCursor);
+  }, []);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch((error) => {
+        console.log("Autoplay prevented:", error);
+      });
+    }
+  }, []);
+
+  const toggleDropdown = (title) => {
+    setOpenDropdown((prev) => (prev === title ? null : title));
+  };
+
+  const handleDropdownItemClick = (path) => {
+    if (path) {
+      navigate(path);
+      setOpenDropdown(null);
+    }
+  };
+
+  const toggleChat = () => {
+    setShowChat(!showChat);
+  };
+
+  
+  const features = [
+    {
+      title: "Safe Baby Products",
+      description: "All items meet the highest safety standards for your baby’s well-being.",
+      icon: "🛡️",
+    },
+    {
+      title: "Affordable Pricing",
+      description: "Best prices on baby essentials without compromising quality.",
+      icon: "💰",
+    },
+    {
+      title: "Fast Delivery",
+      description: "Quick delivery so you get your products when you need them.",
+      icon: "🚚",
+    },
+    {
+      title: "Trusted by Parents",
+      description: "Thousands of families choose Babyland for their baby care needs.",
+      icon: "👨‍👩‍👧",
+    },
+  ];
+
+  
+  const reviews = [
+    {
+      name: 'Sarah Ahmed',
+      rating: 5,
+      feedback: 'The baby clothes are amazing quality!',
+    },
+    {
+      name: 'Ali Raza',
+      rating: 4,
+      feedback: 'Safe toys and quick delivery. Highly recommend!',
+    },
+    {
+      name: 'Ayesha Khan',
+      rating: 5,
+      feedback: 'Loved the baby furniture collection.',
+    },
+    {
+      name: 'Hina Malik',
+      rating: 5,
+      feedback: 'Best store for baby products.',
+    },
+  ];
+
+  const [current, setCurrent] = useState(0);
+  const nextReview = () => {
+    setCurrent((prev) => (prev + 1) % reviews.length);
+  };
+  const prevReview = () => {
+    setCurrent((prev) => (prev - 1 + reviews.length) % reviews.length);
+  };
+  const { name, rating, feedback } = reviews[current];
+
+  return (
+
+<div className="homepage-container">
+  <div className="video-wrapper">
+  <video
+  className="custom-background-video"
+  src="/videos/background.mp4"
+  muted
+  autoPlay
+  loop
+  playsInline
+/>
+
+
+
+
+  </div>
+  
+
+
+
+      <div className="overlay"></div>
+      <div className="custom-cursor"></div>
+
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="logo">
+          <img src="/images/babyland-logo.png" alt="Babyland Logo" />
+          <span>Babyland</span>
+        </div>
+
+        <ul className="nav-links">
+          {navLinks.map((link) => (
+            <li
+              key={link.title}
+              className={`nav-item dropdown-parent ${openDropdown === link.title ? "open" : ""}`}
+              onClick={() => toggleDropdown(link.title)}
+            >
+              {link.title}
+              <FaChevronDown className="dropdown-icon" />
+              {openDropdown === link.title && (
+                <ul className="dropdown-menu">
+                  {link.items.map((item, idx) => (
+                    <li
+                      key={idx}
+                      className="dropdown-item"
+                      onClick={() =>
+                        handleDropdownItemClick(
+                          typeof item === "object" ? item.path : null
+                        )
+                      }
+                      style={{
+                        cursor: typeof item === "object" && item.path ? "pointer" : "default",
+                      }}
+                    >
+                      {typeof item === "object" ? item.name : item}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+
+        <Link to="/login" className="book-button glow">Login</Link>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="hero split-hero fancy-layout">
+        <div className="hero-text fancy-text">
+          <h1 className="animated-gradient-text pop-in text-center">
+            Explore, Care, Love
+          </h1>
+          <p className="tagline fade-in text-center">Your Baby Deserves the Best</p>
+          <p className="subtag fade-in text-center">Safe, Trusted & Affordable</p>
+          <div className="button-group zoom-in button-group-spacing">
+            <button
+              className="reserve-button neon-btn small-btn"
+              onClick={() => navigate('/shop')}
+            >
+              Shop Now
+            </button>
+            <button
+              className="explore-button neon-btn small-btn"
+              onClick={() => navigate('/categories')}
+            >
+              Explore Products
+            </button>
+          </div>
+        </div>
+
+        <div className="carousel-wrapper swipe-carousel">
+          <div
+            className="carousel-slider swipe-transition"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {productImages.map((src, idx) => (
+              <div className="carousel-card fancy-shadow" key={idx}>
+                <div className="dish-card shape-frame">
+                  <img src={src} alt={`Product ${idx + 1}`} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="chat-icon" onClick={toggleChat}>
+        <FaCommentDots className="chat-icon-image" />
+      </div>
+
+      {showChat && (
+        <div className="chat-modal">
+          <div className="chat-header">
+            <h3>Chat with Us</h3>
+            <button onClick={toggleChat}>Close</button>
+          </div>
+          <div className="chat-body">
+            <iframe
+              src="https://www.chatbase.co/chatbot-iframe/A0cXVfTcjn0zIizXzOujv"
+              width="100%"
+              style={{ height: "100%", minHeight: "700px", border: "none" }}
+              frameBorder="0"
+            ></iframe>
+          </div>
+        </div>
+      )}
+
+      {/* Features */}
+      <section className="features-section">
+        <div className="features-grid">
+          {features.map((feature, index) => (
+            <div key={index} className="feature-card">
+              <div className="feature-icon">{feature.icon}</div>
+              <h3 className="feature-title">{feature.title}</h3>
+              <p className="feature-description">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Reviews */}
+      <div className="review-section">
+        <p className="section-label">CUSTOMER REVIEWS</p>
+        <h2 className="review-heading">
+          What Parents Say About Babyland
+        </h2>
+
+        <div className="review-card">
+          <button className="arrow-btn" onClick={prevReview}>
+            <FaChevronLeft />
+          </button>
+
+          <div className="review-content">
+            <div className="review-header">
+              <h3>{name}</h3>
+            </div>
+            <div className="stars">
+              {[...Array(rating)].map((_, i) => (
+                <FaStar key={i} color="#f9a825" />
+              ))}
+            </div>
+            <p className="feedback">{feedback}</p>
+          </div>
+
+          <button className="arrow-btn" onClick={nextReview}>
+            <FaChevronRight />
+          </button>
+        </div>
+      </div>
+<div 
+ 
+  className="custom-background-image" 
+  style={{
+    backgroundImage: "url('/images/image2.jpg')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    zIndex: -1
+  }}
+></div>
+
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footer-content">
+          <h2>Babyland</h2>
+          <p>
+            Bringing Joy to Every Baby’s Life with Trusted Products.
+          </p>
+          <div className="footer-links">
+            <a href="#">Home</a>
+            <Link to="/shop">Shop</Link>
+            <a href="/categories">Categories</a>
+            <a href="/contact">Contact</a>
+          </div>
+          <p className="footer-copy">
+            &copy; {new Date().getFullYear()} Babyland. All Rights Reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+}
