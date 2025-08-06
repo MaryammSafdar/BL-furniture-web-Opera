@@ -1,0 +1,181 @@
+:root {
+  --primary-color: #1a3c3c;
+  --secondary-color: #1e4937;
+  --accent-color: #f5f2e7;
+  --text-dark: #1a3c3c;
+  --text-light: #f5f2e7;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Base layout */
+.privacy-policy-page {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background: var(--accent-color);
+  color: var(--text-dark);
+  overflow: hidden;
+}
+
+/* Sidebar with background image */
+.privacy-policy-sidebar {
+  position: relative;
+  width: 40%;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  animation: slideFadeIn 1.2s ease-out forwards;
+}
+
+.privacy-policy-sidebar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/images/privacy.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+.privacy-policy-sidebar>* {
+  position: relative;
+  z-index: 1;
+}
+
+.privacy-policy-sidebar h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  font-family: 'Georgia', serif;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.privacy-policy-sidebar p {
+  font-size: 1rem;
+  color: rgba(245, 242, 231, 0.85);
+  animation: fadeInUp 1.2s ease-in-out;
+}
+
+/* Main content */
+.privacy-policy-content-wrapper {
+  flex: 1;
+  padding: 60px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: slideFadeIn 1.5s ease-out forwards;
+}
+
+.privacy-policy-content-wrapper h2 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: var(--primary-color);
+  animation: fadeInUp 1.5s ease-in-out;
+}
+
+.privacy-policy-content-wrapper ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+  animation: fadeInUp 1.6s ease-in-out;
+}
+
+.privacy-policy-content-wrapper li {
+  margin-bottom: 15px;
+  padding-left: 25px;
+  position: relative;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.privacy-policy-content-wrapper li::before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  color: var(--secondary-color);
+  font-size: 1.2rem;
+}
+
+/* Last updated note */
+.privacy-policy-date {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 15px;
+  animation: fadeInUp 1.8s ease-in-out;
+}
+
+/* Button */
+.privacy-policy-btn {
+  margin-top: 30px;
+  align-self: center;
+  padding: 12px 20px;
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(26, 60, 60, 0.4);
+  transition: 0.3s ease;
+  width: 32%;
+}
+
+.privacy-policy-btn:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes slideFadeIn {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .privacy-policy-page {
+    flex-direction: column;
+  }
+
+  .privacy-policy-sidebar {
+    width: 100%;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .privacy-policy-content-wrapper {
+    padding: 40px 20px;
+  }
+
+  .privacy-policy-btn {
+    align-self: center;
+  }
+}
